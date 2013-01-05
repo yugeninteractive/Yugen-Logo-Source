@@ -1,0 +1,107 @@
+<!doctype html>  
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="utf-8">
+		
+		<!-- Enables Chrome Frame support for IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		
+		<!--  Mobile viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=0.49">
+		
+		<title>Yugen Logo</title>
+		
+		<!-- Only used to make the debug site more visually appealing,
+			 does not affect the animation itself -->
+		<link rel="stylesheet" href="css/yugen-logo.css">
+		
+		<script>
+			// If JavaScript is available, this will hide our fallback image.
+			// If there's no JS support the fallback image will still appear.
+			document.write('<link rel="stylesheet" type="text/css" media="all" href="css/yugen-logo-hideOnLoad.css" />');
+		</script>
+	</head>
+	
+	<body>
+		
+		<div id="container">
+			<!-- Everything in the header is debug-related and should not be 
+				 here for the live logo -->
+			<header>
+				<div id="debug-panel">
+					<!-- Textarea gets populated via JS to reflect initial options -->
+					<textarea rows="13" cols="100"></textarea>
+					<div class="buttons">
+						<button class="save">Save Image</button>
+						<button class="run">Run Script</button>
+					</div>
+				</div>
+			</header>
+			
+			<!-- This div contains everything needed to run the logo and fallbacks -->
+			<div id="yugen-logo">
+				<canvas id="yugen-logo-canvas" style="display: none;"></canvas>
+				<canvas id="yugen-shadow-canvas" style="display: none;"></canvas>
+				<img src="images/logos/14.png" alt="yugen Logo">
+			</div>
+		</div>
+		
+		<script src="js/libs/jquery-1.4.4.min.js"></script>
+		
+		<!-- The below wrapped comment tells the build script which JS files
+			 that should be minified. Anything outside of it will simply be
+			 copied to the deploy in all of its unminified glory.  -->
+		
+		<!-- START CONCAT -->
+		<script src="js/yugenlogo.js"></script>
+		<script src="js/yugenlogo.util.js"></script>
+		<!-- END CONCAT -->
+		
+		<script src="js/input/yugenlogo.input.move.js"></script>
+		<script src="js/input/yugenlogo.input.press.js"></script>
+		<script src="js/input/yugenlogo.input.orientation.js"></script>
+		
+		<script>
+			// NOTE: 
+			// There are many more default options than what can be
+			// found here, see the "options" object in yugenlogo.js.
+			YugenLogo.initialize( {
+				// The dimensions of the logo (aspect ratio is maintained in JS)
+				width: 400,
+				height: 300,
+				
+				// The ID of the canvas element on which the shadow will be drawn,
+				// if this is left empty or is incorrect no shadow will be used.
+				// Currently disabled since it hurts mobile performance.
+				//shadowCanvasID: "yugen-shadow-canvas",
+				
+				// Add any number of RGB colors that the logo should alternate 
+				// between here
+				colors: [
+					// Foreground: 								// Background
+				    [ new YugenLogo.util.Color( 238, 30, 30 ), 	new YugenLogo.util.Color( 238, 100, 100 ) ],
+				    [ new YugenLogo.util.Color( 30, 238, 30 ), 	new YugenLogo.util.Color( 100, 238, 100 ) ],
+				    [ new YugenLogo.util.Color( 30, 30, 238 ), 	new YugenLogo.util.Color( 100, 100, 238 ) ] 
+				],
+				
+				// Contains a list of plugins that will be used for input, see
+				// the individual plugin files for more info
+				inputs: [ 
+					YugenLogo.input.move, 
+					YugenLogo.input.press
+				],
+				
+				// A list of images to rotate between in browsers that do not
+				// support the canvas element
+				fallbackImages: [
+					'images/logos/1.png','images/logos/2.png','images/logos/3.png',
+					'images/logos/4.png','images/logos/5.png','images/logos/6.png',
+					'images/logos/7.png','images/logos/8.png','images/logos/9.png',
+					'images/logos/10.png','images/logos/11.png','images/logos/12.png',
+					'images/logos/13.png','images/logos/14.png'
+				]
+			} );
+		</script>
+		
+	</body>
+</html>
