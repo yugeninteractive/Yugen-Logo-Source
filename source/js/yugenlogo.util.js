@@ -1,11 +1,11 @@
 
 /**
- * Extends an object with a new set of values, any 
+ * Extends an object with a new set of values, any
  * conflicting values will be overwritten in the base
  * object.
- * 
+ *
  * <p>Note: should not be used with nested objects</p>
- * 
+ *
  * @param base {Object} The object which will be extended
  * @param extension {Object} All properties of this object
  * will be copied to the base object
@@ -19,7 +19,7 @@ YugenLogo.util.extendObject = function( base, extension ) {
 
 
 /**
- * 
+ *
  * @param {Object} p1
  * @param {Object} p2
  */
@@ -31,11 +31,11 @@ YugenLogo.util.distanceBetween = function(p1, p2) {
 
 
 /**
- * 
+ *
  */
 YugenLogo.util.randomBetween = function( min, max, abs ) {
 	var number = min + ( Math.random() * ( max - min ) );
-	
+
 	if( absMin !== undefined && min < -absMin && max > absMin ) {
 		if( Math.random() > 0.5 ) {
 			number = absMin + ( Math.random() * ( max - absMin ) );
@@ -44,26 +44,26 @@ YugenLogo.util.randomBetween = function( min, max, abs ) {
 			number = -absMin + ( Math.random() * ( min + absMin ) );
 		}
 	}
-	
+
 	return number;
 }
 
 
 
 /**
- * 
+ *
  */
 YugenLogo.util.getLoopedArrayElement = function( array, index ) {
 	if( array[index] ) {
 		return array[index];
 	}
-	
+
 	var l = array.length;
-	
+
 	if( index > l-1 ) {
 		return array[index - l];
 	}
-	
+
 	if( index < 0 ) {
 		return array[l + index];
 	}
@@ -72,7 +72,7 @@ YugenLogo.util.getLoopedArrayElement = function( array, index ) {
 
 
 /**
- * 
+ *
  */
 YugenLogo.util.Color = function( r, g, b, a ) {
 	this.r = r || 0;
@@ -89,13 +89,13 @@ YugenLogo.util.Color.prototype.approach = function( rgba, amp ) {
 }
 
 YugenLogo.util.Color.prototype.isWithinRangeOf = function( range, rgba ) {
-	
+
 	if( Math.abs( this.r - rgba.r ) < range ||
 		Math.abs( this.g - rgba.g ) < range ||
 		Math.abs( this.b - rgba.b ) < range ) {
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -137,17 +137,17 @@ YugenLogo.util.Point.prototype.clonePosition = function() {
  * Defines of a rectangular region.
  */
 YugenLogo.util.Region = function() {
-	this.left = Number.POSITIVE_INFINITY; 
-	this.top = Number.POSITIVE_INFINITY; 
-	this.right = 0; 
+	this.left = Number.POSITIVE_INFINITY;
+	this.top = Number.POSITIVE_INFINITY;
+	this.right = 0;
 	this.bottom = 0;
 }
 
 YugenLogo.util.Region.prototype.reset = function() {
-	this.left = Number.POSITIVE_INFINITY; 
-	this.top = Number.POSITIVE_INFINITY; 
-	this.right = 0; 
-	this.bottom = 0; 
+	this.left = Number.POSITIVE_INFINITY;
+	this.top = Number.POSITIVE_INFINITY;
+	this.right = 0;
+	this.bottom = 0;
 };
 
 YugenLogo.util.Region.prototype.inflate = function( x, y ) {
