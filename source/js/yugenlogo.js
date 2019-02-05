@@ -873,6 +873,13 @@ var YugenLogo = (function( window ) {
 		options.width = width || options.width;
 		options.height = height || options.height;
 
+		var deviceScale = window.devicePixelRatio || 1;
+
+		if( deviceScale > 1 ) {
+			options.width *= deviceScale;
+			options.height *= deviceScale;
+		}
+
 		// Update the global scale
 		scale = Math.min( options.width / ORIGINAL_WIDTH, options.height / ORIGINAL_HEIGHT );
 
@@ -880,6 +887,8 @@ var YugenLogo = (function( window ) {
 		if( logoCanvas ) {
 			logoCanvas.width = options.width;
 			logoCanvas.height = options.height;
+			logoCanvas.style.width = (options.width / deviceScale) + 'px';
+			logoCanvas.style.height = (options.height / deviceScale) + 'px';
 		}
 
 		// Update the size of the shadow canvas element (if there is one)
